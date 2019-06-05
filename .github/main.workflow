@@ -13,12 +13,6 @@ action "Test and Build" {
   }
 }
 
-action "Benchmark" {
-  needs = "Test and Build"
-  uses = "./.github"
-  args = "./tools/bench.sh"
-}
-
 # Filter for master branch
 action "if branch = master:" {
   needs = "Test and Build"
@@ -44,4 +38,10 @@ action "Build Fuzz Targets" {
   needs = "if branch = fuzz:"
   uses = "./.github/"
   args = "cargo afl build"
+}
+
+action "Benchmark" {
+  needs = "Test and Build"
+  uses = "./.github"
+  args = "./tools/bench.sh"
 }

@@ -9,7 +9,7 @@ RUN rustup component add rustfmt
 RUN cargo install --force cargo-fuzz afl honggfuzz
 
 RUN apt-get update && \
-	apt-get install -y cmake && \
+	apt-get install -y cmake g++-4.8 gcc-4.8 && \
 	rm -rf /var/lib/apt/lists/*
 
 COPY entrypoint.sh /entrypoint.sh

@@ -8,8 +8,6 @@ action "Test and Build" {
   args = "cargo test --all && cargo build --release"
   env = {
     RUST_BACKTRACE = "1"
-	CXX = "g++-4.8"
-  	CC = "gcc-4.8"
   }
 }
 

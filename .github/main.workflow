@@ -26,28 +26,28 @@ action "Benchmark" {
 
 
 # Filter for master branch
-action "if branch = master:" {
-  needs = ["Test", "Build", "Benchmark"]
-  uses = "actions/bin/filter@master"
-  args = "branch master"
-}
+# action "if branch = master:" {
+#   needs = ["Test", "Build", "Benchmark"]
+#   uses = "actions/bin/filter@master"
+#   args = "branch master"
+# }
 
 action "Doc" {
-  needs = "if branch = master:"
+  needs = ["Test", "Build", "Benchmark"]
   uses = "./.github/"
   args = "cargo doc"
 }
 
 # Filter for fuzz branch
 # TODO: remove when fuzzing merged to master
-action "if branch = fuzz:" {
-  needs = ["Test", "Build", "Benchmark"]
-  uses = "actions/bin/filter@master"
-  args = "branch fuzz"
-}
+# action "if branch = fuzz:" {
+#   needs = ["Test", "Build", "Benchmark"]
+#   uses = "actions/bin/filter@master"
+#   args = "branch fuzz"
+# }
 
 action "Build Fuzz Targets" {
-  needs = "if branch = fuzz:"
+  needs = ["Test", "Build", "Benchmark"]
   uses = "./.github/"
   args = "cargo afl build"
 }

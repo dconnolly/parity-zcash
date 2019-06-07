@@ -1,5 +1,8 @@
 FROM rust:1.35.0
 
+LABEL "name"="rust"
+LABEL "version"="1.0.0"
+
 LABEL "com.github.actions.name"="Rust Action"
 LABEL "com.github.actions.description"="Invoke `cargo` and such."
 LABEL "com.github.actions.icon"="terminal"

@@ -1,6 +1,7 @@
 FROM rust:latest
 
 LABEL "com.github.actions.name"="Rust Action"
+LABEL "com.github.actions.description"="Invoke `cargo` and such."
 LABEL "com.github.actions.icon"="cpu"
 LABEL "com.github.actions.color"="orange"
 

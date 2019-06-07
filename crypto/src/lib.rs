@@ -210,10 +210,13 @@ pub fn dhash160(input: &[u8]) -> H160 {
 /// Double SHA-256
 #[inline]
 pub fn dhash256(input: &[u8]) -> H256 {
+	println!("{:?}", input);
 	let mut result = H256::default();
+	println!("{}", result);
 	let mut hasher = DHash256::new();
 	hasher.input(input);
 	hasher.result(&mut *result);
+	println!("{}", result);
 	result
 }
 

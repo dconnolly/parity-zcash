@@ -8,7 +8,6 @@ RUN apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y clang cmake gcc
 
-RUN rustup component add rustfmt
 RUN cargo install --force cargo-fuzz afl honggfuzz
 
 COPY entrypoint.sh /entrypoint.sh

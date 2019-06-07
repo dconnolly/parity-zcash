@@ -5,7 +5,7 @@ workflow "On Push" {
 
 action "Test and Build" {
   uses = "./.github"
-  args = "cargo test --all && cargo build --release"
+  args = "cargo test --all example5"
   env = {
     RUST_BACKTRACE = "1"
   }

@@ -605,7 +605,6 @@ fn example5() {
 
 	assert_eq!(hash, "f50c5629c1b6921cb9219574152b253dc72f7de96b0813aab75e2f2fb43e05e5".into());
 	assert_eq!(block.header().previous_header_hash, "0000000000000000000000000000000000000000000000000000000000000000".into());
-	assert_eq!(1, 0);
 }
 
 #[test]

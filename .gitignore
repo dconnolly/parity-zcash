@@ -17,3 +17,6 @@
 .idea
 hfuzz_target/
 fuzz/target/
+fuzz/artifacts
+fuzz/hfuzz_target
+fuzz/hfuzz_workspace

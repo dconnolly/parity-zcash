@@ -5,7 +5,7 @@ workflow "On Push" {
 
 action "Test" {
   uses = "./.github"
-  args = "cargo test --all"
+  args = "cargo check && cargo test --all"
   env = {
     RUST_BACKTRACE = "1"
   }
@@ -32,15 +32,14 @@ action "Benchmark" {
 #   args = "branch master"
 # }
 
-
-action "Build Fuzz Targets" {
+action "Doc" {
   needs = ["Test", "Build", "Benchmark"]
   uses = "./.github/"
-  args = "cargo afl build"
+  args = "cargo doc"
 }
 
-# action "Doc" {
-#   needs = ["Test", "Build", "Benchmark"]
-#   uses = "./.github/"
-#   args = "cargo doc"
-# }
+action "Build Fuzz Targets" {
+  needs = ["Test", "Build"]
+  uses = "./.github/"
+  args = "cd fuzz/ && cargo install --force afl honggfuzz && cargo hfuzz build && cargo afl build"
+}

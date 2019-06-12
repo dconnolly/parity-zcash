@@ -12,17 +12,16 @@ RUN apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y clang cmake gcc
 
-RUN pwd && ls -la
+RUN env
 
-COPY Cargo.toml /Cargo.toml
-COPY Cargo.lock /Cargo.lock
-COPY . /.
+WORKDIR $GITHUB_WORKSPACE
+
+COPY Cargo.toml Cargo.toml
+COPY Cargo.lock Cargo.lock
+COPY . .
 
 # this build step will cache dependencies
 RUN cargo build
-
-# move over updated source
-COPY . /.
 
 # run per-action commands
 COPY entrypoint.sh /entrypoint.sh

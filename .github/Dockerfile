@@ -12,6 +12,8 @@ RUN apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y clang cmake gcc
 
+COPY . /
+
 # this build step will cache dependencies
 RUN cargo build
 
@@ -19,7 +21,7 @@ RUN cargo build
 RUN rm ./target/
 
 # move over updated source
-# COPY . .
+COPY . /
 
 # run per-action commands
 COPY entrypoint.sh /entrypoint.sh

@@ -12,7 +12,7 @@ RUN apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y clang cmake gcc
 
-RUN git clone git@github.com:paritytech/parity-zcash.git --depth=1 && cd parity-zcash/
+RUN git clone https://github.com/paritytech/parity-zcash --depth=1 && cd parity-zcash/
 
 # this build step will cache dependencies
 RUN cargo build

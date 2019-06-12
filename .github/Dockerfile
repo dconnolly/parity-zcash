@@ -12,10 +12,10 @@ RUN apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y clang cmake gcc
 
-WORKDIR /github/workspace
+WORKDIR /temp
 
-COPY Cargo.toml Cargo.toml
-COPY Cargo.lock Cargo.lock
+COPY Cargo.toml ./Cargo.toml
+COPY Cargo.lock ./Cargo.lock
 COPY . .
 
 # this build step will cache dependencies

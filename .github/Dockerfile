@@ -12,6 +12,8 @@ RUN apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y clang cmake gcc
 
+RUN pwd && ls -la
+
 COPY Cargo.toml /Cargo.toml
 COPY Cargo.lock /Cargo.lock
 COPY . /.

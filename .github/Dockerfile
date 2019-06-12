@@ -12,11 +12,9 @@ RUN apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y clang cmake gcc
 
-RUN git clone https://github.com/paritytech/parity-zcash --depth=1 && cd parity-zcash/
-
-# this build step will cache dependencies
-RUN cargo build
-
-# run per-action commands
+RUN git clone https://github.com/paritytech/parity-zcash --depth=1 && \
+        cd parity-zcash/ && \
+	cargo build
+	
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

@@ -1,6 +1,6 @@
 workflow "On Push" {
   on = "push"
-  resolves = ["Build Fuzz Targets"]
+  resolves = ["Test", "Build", "Build Fuzz Targets"]
 }
 
 action "Test" {

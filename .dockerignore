@@ -21,3 +21,9 @@ target
 
 # ignore compare tools
 tools/compare-tool
+
+hfuzz_target/
+fuzz/target/
+fuzz/artifacts
+fuzz/hfuzz_target
+fuzz/hfuzz_workspace

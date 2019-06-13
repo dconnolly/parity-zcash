@@ -4,24 +4,24 @@ workflow "On Push" {
 }
 
 action "Test" {
-  uses = "./.github"
-  args = "cargo check && cargo test --all"
+  uses = "docker://gcr.io/zebrad/fuzz:latest"
+  runs = "cargo check && cargo test --all"
   env = {
     RUST_BACKTRACE = "1"
   }
 }
 
 action "Build" {
-  uses = "./.github"
-  args = "cargo build --release"
+  uses = "docker://gcr.io/zebrad/fuzz:latest"
+  runs = "cargo build --release"
   env = {
     RUST_BACKTRACE = "1"
   }
 }
 
 action "Benchmark" {
-  uses = "./.github"
-  args = "./tools/bench.sh"
+  uses = "docker://gcr.io/zebrad/fuzz:latest"
+  runs = "./tools/bench.sh"
 }
 
 
@@ -34,12 +34,12 @@ action "Benchmark" {
 
 action "Doc" {
   needs = ["Test", "Build", "Benchmark"]
-  uses = "./.github/"
-  args = "cargo doc"
+  uses = "docker://gcr.io/zebrad/fuzz:latest"
+  runs = "cargo doc"
 }
 
 action "Build Fuzz Targets" {
   needs = ["Test", "Build"]
-  uses = "./.github/"
-  args = "cd fuzz/ && cargo install --force afl honggfuzz && cargo hfuzz build && cargo afl build"
+  uses = "docker://gcr.io/zebrad/fuzz:latest"
+  runs = "cd fuzz/ && cargo install --force afl honggfuzz && cargo hfuzz build && cargo afl build"
 }

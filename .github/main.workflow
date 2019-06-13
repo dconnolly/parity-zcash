@@ -5,7 +5,7 @@ workflow "On Push" {
 
 action "Test" {
   uses = "docker://gcr.io/zebrad/fuzz:latest"
-  runs = "cargo check && cargo test --all"
+  runs = ["sh", "-c", "cargo check && cargo test --all"]
   env = {
     RUST_BACKTRACE = "1"
   }
@@ -13,7 +13,7 @@ action "Test" {
 
 action "Build" {
   uses = "docker://gcr.io/zebrad/fuzz:latest"
-  runs = "cargo build --release"
+  runs = ["sh", "-c", "cargo build --release"]
   env = {
     RUST_BACKTRACE = "1"
   }
@@ -41,5 +41,5 @@ action "Doc" {
 action "Build Fuzz Targets" {
   needs = ["Test", "Build"]
   uses = "docker://gcr.io/zebrad/fuzz:latest"
-  runs = "cd fuzz/ && cargo install --force afl honggfuzz && cargo hfuzz build && cargo afl build"
+  runs = ["sh", "-c", "cd fuzz/ && cargo install --force afl honggfuzz && cargo hfuzz build && cargo afl build"]
 }

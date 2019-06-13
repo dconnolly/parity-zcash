@@ -13,8 +13,9 @@ RUN rm -rf pzec/*
 RUN echo "fn main() {println!(\"Hello, world! \")}" > pzec/main.rs
 
 # Install and cache dependencies.
-RUN cargo build --verbose --release
-RUN rm -f target/release/deps/pzec*
+RUN cargo build --verbose
+RUN cargo test --all
+# RUN rm -f target/release/deps/pzec*
 
 # Copy over possibly updated sources.
 COPY . .

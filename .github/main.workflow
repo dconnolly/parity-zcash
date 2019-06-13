@@ -24,22 +24,21 @@ action "Benchmark" {
   runs = "./tools/bench.sh"
 }
 
-
 # Filter for master branch
-# action "if branch = master:" {
-#   needs = ["Test", "Build", "Benchmark"]
-#   uses = "actions/bin/filter@master"
-#   args = "branch master"
-# }
+action "if branch = master:" {
+  needs = ["Test", "Build"]
+  uses = "actions/bin/filter@master"
+  args = "branch master"
+}
 
 action "Doc" {
-  needs = ["Test", "Build", "Benchmark"]
+  needs = ["if branch = master:"]
   uses = "docker://gcr.io/zebrad/fuzz:latest"
   runs = "cargo doc"
 }
 
 action "Build Fuzz Targets" {
-  needs = ["Test", "Build"]
+  needs = ["if branch = master:"]
   uses = "docker://gcr.io/zebrad/fuzz:latest"
   runs = ["sh", "-c", "cd fuzz/ && cargo install --force afl honggfuzz && cargo hfuzz build && cargo afl build"]
 }

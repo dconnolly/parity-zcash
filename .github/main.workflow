@@ -31,11 +31,11 @@ action "if branch = master:" {
   args = "branch master"
 }
 
-action "Doc" {
-  needs = ["if branch = master:"]
-  uses = "docker://gcr.io/zebrad/fuzz:latest"
-  runs = "cargo doc"
-}
+# action "Doc" {
+#   needs = ["if branch = master:"]
+#   uses = "docker://gcr.io/zebrad/fuzz:latest"
+#   runs = "cargo doc"
+# }
 
 action "Build Fuzz Targets" {
   needs = ["if branch = master:"]

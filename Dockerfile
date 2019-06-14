@@ -1,4 +1,4 @@
-FROM rust:1.35.0
+FROM rust:1.35.0-slim
 
 RUN apt-get update && \
 	apt-get upgrade -y && \
@@ -13,9 +13,7 @@ RUN rm -rf pzec/*
 RUN echo "fn main() {println!(\"Hello, world! \")}" > pzec/main.rs
 
 # Install and cache dependencies.
-RUN cargo build --verbose
-RUN cargo test --all
-# RUN rm -f target/release/deps/pzec*
+RUN cargo build --release
 
 # Copy over possibly updated sources.
 COPY . .

@@ -1,19 +1,11 @@
 workflow "On Push" {
   on = "push"
-  resolves = ["Test", "Build", "Build Fuzz Targets"]
+  resolves = ["Build and Test", "Build Fuzz Targets"]
 }
 
-action "Test" {
+action "Build and Test" {
   uses = "docker://gcr.io/zebrad/fuzz:latest"
-  runs = ["sh", "-c", "cargo check && cargo test --all"]
-  env = {
-    RUST_BACKTRACE = "1"
-  }
-}
-
-action "Build" {
-  uses = "docker://gcr.io/zebrad/fuzz:latest"
-  runs = ["sh", "-c", "cargo build --release"]
+  runs = ["sh", "-c", "cargo check && build --release && cargo test --release --all"]
   env = {
     RUST_BACKTRACE = "1"
   }
@@ -26,7 +18,7 @@ action "Benchmark" {
 
 # Filter for master branch
 action "if branch = master:" {
-  needs = ["Test", "Build"]
+  needs = ["Build and Test"]
   uses = "actions/bin/filter@master"
   args = "branch master"
 }

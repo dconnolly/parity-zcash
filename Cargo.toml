@@ -27,11 +27,6 @@ storage = { path = "storage" }
 sync = { path = "sync" }
 verification = { path = "verification" }
 
-[dev-dependencies]
-cargo-fuzz = "0.5"
-afl = "0.4.3"
-honggfuzz = "0.5.45"
-
 [profile.dev]
 debug = true
 panic = 'abort'

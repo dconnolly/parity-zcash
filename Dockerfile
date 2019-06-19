@@ -1,8 +1,10 @@
 FROM rust:stretch as base
 
 RUN apt-get update && \
-	apt-get upgrade -y && \
-	apt-get install -y build-essentials clang cmake
+	apt-get install -y --no-install-recommends \
+	software-properties-common curl git \
+	make cmake ca-certificates g++ rhash \
+	gcc pkg-config libudev-dev time
 
 ENV RUST_BACKTRACE 1
 

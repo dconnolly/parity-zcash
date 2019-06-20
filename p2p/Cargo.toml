@@ -13,7 +13,7 @@ time = "0.1"
 rand = "0.4"
 log = "0.4"
 abstract-ns = "0.3"
-ns-dns-tokio = "0.3"
+ns-dns-tokio = "0.4"
 csv = "1"
 
 primitives = { path = "../primitives" }

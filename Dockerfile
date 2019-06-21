@@ -11,12 +11,12 @@ ENV RUST_BACKTRACE 1
 ENV CARGO_HOME /zebra/.cargo/
 
 # Copy cached target/ from master
-COPY --from=gcr.io/zebrad/master:latest /zebra/target ./target
+COPY --from=gcr.io/zebrad/master:latest /zebra/target /zebra/target
 
 # Copy cached .cargo/ from master
-COPY --from=gcr.io/zebrad/master:latest /zebra/.cargo /.cargo
+COPY --from=gcr.io/zebrad/master:latest /zebra/.cargo /zebra/.cargo
 
-RUN ls -la .cargo/ && ls -la target/
+RUN ls -la /zebra/.cargo/ && ls -la /zebra/target/
 
 # Copy local code to the container image.
 # Assumes that we are in the git repo.

@@ -3,11 +3,6 @@ workflow "On Push" {
   resolves = ["Push image to GCR"]
 }
 
-action "Setup Google Cloud" {
-  uses = "actions/gcloud/auth@master"
-  secrets = ["GCLOUD_AUTH"]
-}
-
 action "Build and Test Image" {
   uses = "actions/docker/cli@master"
   args = ["build -t zebrad ."]
@@ -19,6 +14,12 @@ action "if branch = master:" {
   needs = ["Build and Test Image"]
   uses = "actions/bin/filter@master"
   args = "branch master"
+}
+
+action "Setup Google Cloud" {
+  needs = ["if branch = master:"]
+  uses = "actions/gcloud/auth@master"
+  secrets = ["GCLOUD_AUTH"]
 }
 
 action "Tag image for GCR" {

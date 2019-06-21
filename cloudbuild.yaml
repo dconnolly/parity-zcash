@@ -1,8 +1,0 @@
-steps:
-- name: 'gcr.io/kaniko-project/executor:latest'
-  args:
-  - --destination=gcr.io/zebrad/fuzz
-  - --cache=true
-  - --cache-ttl=12h
-options:
- machineType: 'N1_HIGHCPU_8'
